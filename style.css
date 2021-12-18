@@ -1,5 +1,7 @@
-html {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+html,
+body {
+  margin: 0px;
+  padding: 0px;
+  overflow: hidden;
+  font-family: helvetica, arial, sans-serif;
 }
