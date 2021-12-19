@@ -23,7 +23,7 @@ class Demo extends PatternBase {
 			const angle = this.toRadians(cube.globalTheta);
 			const hue = Math.sin(angle + this.count * 0.05) * 360 * 0.5 + 360 * 0.5;
 			const saturation = 50.0;
-			const brightness = 50.0;
+			const brightness = 100.0;
 			// Set hue (0-360), saturation (0-100), brightness (0-100)
 			cube.setHSB(hue, saturation, brightness);
 		}
