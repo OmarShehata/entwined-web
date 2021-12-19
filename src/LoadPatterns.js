@@ -8,6 +8,10 @@ function loadPatterns(newPatternCallback) {
 	gui.add(params, "pattern", PATTERNS).onChange(val => {
 		newPatternCallback(val);
 	});
+
+	gui.add({ 'About this project': () => {
+		window.open('https://github.com/OmarShehata/entwined-web', '_blank')
+	} }, 'About this project');
 }
 
 export default loadPatterns;
