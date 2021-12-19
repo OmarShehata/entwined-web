@@ -2,11 +2,12 @@ import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import BaseCube from './BaseCube.js';
 import Model from './Model.js';
-import { SCALE } from './Scale.js';
 import entwinedFairyCirclesUrl from '../static/entwinedFairyCircles.json?url'
 import entwinedShrubsUrl from '../static/entwinedShrubs.json?url'
 import entwinedTreesUrl from '../static/entwinedTrees.json?url'
 //import demoPattern from './patterns/demo.js';
+import loadPatterns from './LoadPatterns.js';
+
 
 init();
 
@@ -18,7 +19,7 @@ async function init() {
     1,
     10000
   );
-  camera.position.set(200 * SCALE, 200 * SCALE, -300 * SCALE);
+  camera.position.set(200 , 200 , -500 );
   const scene = new THREE.Scene();
   const renderer = new THREE.WebGLRenderer({
     canvas: document.querySelector("canvas"),
@@ -35,10 +36,10 @@ async function init() {
   scene.add( ambientLight );
 
   // Create a plane that marks the location 0,0 
-  const planeGeometry = new THREE.PlaneGeometry( 350 * SCALE, 350 * SCALE );
+  const planeGeometry = new THREE.PlaneGeometry( 350 , 350  );
   const planeMaterial = new THREE.MeshBasicMaterial( {color: 0x222222, side: THREE.DoubleSide} );
   const plane = new THREE.Mesh( planeGeometry, planeMaterial );
-  plane.position.set((-350 / 2) * SCALE, 0, (350 / 2) * SCALE);
+  plane.position.set((-350 / 2) , 0, (350 / 2) );
   plane.rotateX(Math.PI / 2);
   scene.add( plane );
 
@@ -49,9 +50,14 @@ async function init() {
     scene.add(cube);
   }
 
-  ///// Load the patterns
-  let demoModule = await import('./patterns/demo.js');
-  let pattern = new demoModule.default(cubes);
+  ///// Load the patterns & GUI
+  let patternModule = await import('./patterns/demo.js');
+  let patternInstance = new patternModule.default(cubes);
+
+  loadPatterns(async (newPattern) => {
+    patternModule = await import(`./patterns/${newPattern}.js`);
+    patternInstance = new patternModule.default(cubes);
+  });
 
   ////////// Orbit camera controls.
   let controls = new OrbitControls(camera, renderer.domElement);
@@ -74,10 +80,10 @@ async function init() {
   let lastTimestamp = 0;
   function update(timestamp) {
     requestAnimationFrame(update);
-    
+
     deltaTime = (timestamp - lastTimestamp);
     lastTimestamp = timestamp;
-    pattern.run(deltaTime);
+    patternInstance.run(deltaTime);
 
     renderer.render(scene, camera);
   }
@@ -86,10 +92,15 @@ async function init() {
   // Listen for hot module reload of patterns
   document.body.addEventListener('hot-module-reload', (event) => {
     const { newModule } = event.detail;
-    // TODO check if the new pattern is the same as the one currently active
-    const newPattern = new newModule.default(cubes);
-    newPattern.hotReload(pattern)
-    pattern = newPattern;
+    // If the module that changed is not the one currently active, ignore it
+    if (patternModule.default.name != newModule.default.name) {
+      return;
+    }
+    const newPatternInstance = new newModule.default(cubes);
+    newPatternInstance.hotReload(patternInstance)
+    patternInstance = newPatternInstance;
+
+    patternModule = newModule;
   });
 
   function onWindowResize() {

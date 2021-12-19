@@ -6,7 +6,13 @@ class PatternBase {
 
 	constructor(cubes) {
 		this.cubes = cubes;
+		// For effects that want to access cubes in order
+		this.cubesByIndex = [];
+		for (let cube of cubes) {
+			this.cubesByIndex[cube.index] = cube;
+		}
 	}
+	
 	hotReload(oldModule) {}
 	run(deltaMs) {}
 }
