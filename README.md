@@ -44,6 +44,7 @@ Other items on my mind:
 * Create some modulator helper functions so users creating patterns can just say "I want this value to alternate between X to Y as a sine wave" without having to do this manually
 * Set up first person controls to allow a user to see what it would be really like to stand there in person at the art installation
   * See: https://threejs.org/docs/#examples/en/controls/FirstPersonControls 
+* Add a human-scale model to give users an idea of how large these structures are
 
 I'm particularly excited about the first person view mode because I think it creates a very different effect to be standing there in person, and I think it would be cool to see that while designing.
 
