@@ -18,7 +18,7 @@ It currently supports:
 
 Preview of building a pattern with hot reload:
 
-TODO, add video.
+https://user-images.githubusercontent.com/1711126/146687633-339c650e-54c1-4ccf-a4f8-8dbc4c6aff00.mp4
 
 ## Running locally
 
@@ -47,4 +47,5 @@ Other items on my mind:
 
 I'm particularly excited about the first person view mode because I think it creates a very different effect to be standing there in person, and I think it would be cool to see that while designing.
 
-TODO, add video.
+![entwined-fps](https://user-images.githubusercontent.com/1711126/146687648-96ad0a6c-8f45-477f-acbc-cfd641524b58.gif)
+
