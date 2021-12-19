@@ -5,7 +5,6 @@ import Model from './Model.js';
 import entwinedFairyCirclesUrl from '../static/entwinedFairyCircles.json?url'
 import entwinedShrubsUrl from '../static/entwinedShrubs.json?url'
 import entwinedTreesUrl from '../static/entwinedTrees.json?url'
-//import demoPattern from './patterns/demo.js';
 import loadPatterns from './LoadPatterns.js';
 
 
@@ -51,7 +50,7 @@ async function init() {
   }
 
   ///// Load the patterns & GUI
-  let patternModule = await import('./patterns/demo.js');
+  let patternModule = await import('./patterns/twister.js');
   let patternInstance = new patternModule.default(cubes);
 
   loadPatterns(async (newPattern) => {

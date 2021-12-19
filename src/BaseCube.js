@@ -57,7 +57,11 @@ class BaseCube extends THREE.Mesh {
 		hue = hue / 360
 		saturation = saturation / 100
 		brightness = brightness / 100
-		this.material.color.setHSL(hue, saturation, brightness);
+
+		// Note: settings brightness to 100% makes it white, which
+		// isn't the behavior in the original entwined
+		// so I'm capping brightness at 50 here
+		this.material.color.setHSL(hue, saturation, brightness * 0.5);
 	}
 
 	getHue() {
@@ -67,7 +71,7 @@ class BaseCube extends THREE.Mesh {
 		return this.material.color.getHSL({}).s * 100;
 	}
 	getBrightness() {
-		return this.material.color.getHSL({}).l * 100;
+		return this.material.color.getHSL({}).l * 100 * 2;
 	}
 }
 
