@@ -1,6 +1,6 @@
 // Loaded from index.html
 const GUI = dat.GUI;
-const PATTERNS = ['twister', 'demo'];
+const PATTERNS = ['twister', 'fairySnake', 'demo'];
 
 function loadPatterns(newPatternCallback) {
 	const gui = new GUI({ width: 300 });
