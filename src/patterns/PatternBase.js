@@ -4,8 +4,9 @@ class PatternBase {
 		document.body.dispatchEvent(event);
 	}
 
-	constructor(cubes) {
+	constructor(cubes, model) {
 		this.cubes = cubes;
+		this.model = model;
 		// For effects that want to access cubes in order
 		this.cubesByIndex = [];
 		// Also compute yMin, yMax, xMin, xMax

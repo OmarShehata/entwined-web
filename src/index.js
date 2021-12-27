@@ -51,11 +51,11 @@ async function init() {
 
   ///// Load the patterns & GUI
   let patternModule = await import('./patterns/twister.js');
-  let patternInstance = new patternModule.default(cubes);
+  let patternInstance = new patternModule.default(cubes, model);
 
   loadPatterns(async (newPattern) => {
     patternModule = await import(`./patterns/${newPattern}.js`);
-    patternInstance = new patternModule.default(cubes);
+    patternInstance = new patternModule.default(cubes, model);
   });
 
   ////////// Orbit camera controls.
@@ -95,7 +95,7 @@ async function init() {
     if (patternModule.default.name != newModule.default.name) {
       return;
     }
-    const newPatternInstance = new newModule.default(cubes);
+    const newPatternInstance = new newModule.default(cubes, model);
     newPatternInstance.hotReload(patternInstance)
     patternInstance = newPatternInstance;
 

@@ -15,10 +15,13 @@ class MiniCluster {
 		16, 14, 14, 12];
 	N_CUBES = 12;
 	cubes = [];
+	pieceId = ""
 
 	constructor(miniClusterPosition, miniClusterRotation /*radians*/, fcc, sculptureIndex) {
-		const { x, z } = fcc;
+		const { x, z, pieceId } = fcc;
 		const { N_CUBES, RADIUS, HEIGHTS, cubes } = this;
+
+		this.pieceId = pieceId;
 
 		let rads = miniClusterRotation;
 		let rad_step = (360 / N_CUBES) * TO_RADIANS;
@@ -42,6 +45,8 @@ class MiniCluster {
 class Fixture {
 	MINICLUSTERS_PER_NDB = 5;
 	cubes = [];
+	miniClusters = [];
+	pieceId = ""
 
 	constructor(fcc /*fairyCircleConfig*/) {
 		const N_MINICLUSTERS = fcc.ipAddresses.length * this.MINICLUSTERS_PER_NDB;
@@ -49,6 +54,7 @@ class Fixture {
 		const rad_step = (360 / N_MINICLUSTERS) * TO_RADIANS;
 		let rads = fcc.ry * TO_RADIANS;
 		let miniClusterRotation = Math.PI; 
+		this.pieceId = fcc.pieceId;
 
 		for (let i = 0; i < N_MINICLUSTERS; i++) {
 			const miniClusterPosition = new THREE.Vector3();
@@ -58,6 +64,7 @@ class Fixture {
 			miniClusterPosition.z = fcc.radius * Math.sin(rads);
 
 			const cluster = new MiniCluster(miniClusterPosition, miniClusterRotation, fcc, i);
+			this.miniClusters.push(cluster);
 
 			rads += rad_step;
 			miniClusterRotation += rad_step;
@@ -69,10 +76,12 @@ class Fixture {
 
 class FairyCircleModel {
 	cubes = []
+	fairyCircles = []
 	constructor(fairyCircleConfig) {
 		for (let fcc of fairyCircleConfig) {
 			const fixture = new Fixture(fcc);
 			this.cubes.push(...fixture.cubes);
+			this.fairyCircles.push(fixture);
 		}
 	}
 }

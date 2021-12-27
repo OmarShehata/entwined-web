@@ -15,6 +15,7 @@ async function loadFile(url) {
 class Model {
 	loaded = false;
 	cubes = [];
+	fairyCircles = [];
 
 	constructor(fairyCircleFileURL, shrubFileURL, treeFileURL) {
 		this.fairyCircleFileURL = fairyCircleFileURL;
@@ -25,11 +26,12 @@ class Model {
 	async load() {
 		if (this.loaded == false) {
 			const fairyCircle = await loadFile(this.fairyCircleFileURL);
-			let cubes = this.createFairyCircles(fairyCircle);
-			this.cubes.push(...cubes);
+			const fcModel = this.createFairyCircles(fairyCircle);
+			this.fairyCircles = [...fcModel.fairyCircles];
+			this.cubes.push(...fcModel.cubes);
 
 			const shrubs = await loadFile(this.shrubFileURL);
-			cubes = this.createShrubs(shrubs);
+			let cubes = this.createShrubs(shrubs);
 			this.cubes.push(...cubes);
 
 			const trees = await loadFile(this.treeFileURL);
@@ -42,7 +44,7 @@ class Model {
 	
 	createFairyCircles(fairyCircleConfig) {
 		const fairyCircleModel = new FairyCircleModel(fairyCircleConfig);
-		return fairyCircleModel.cubes;
+		return fairyCircleModel;
 	}
 
 	createShrubs(shrubConfig) {
