@@ -1,1 +1,0 @@
-import c from"./PatternBase.36a526eb.js";class h extends c{constructor(t){super(t);this.count=0}hotReload(t){this.count=t.count}run(t){for(let s of this.cubes){const o=this.toRadians(s.globalTheta),e=Math.sin(o+this.count*.05)*360*.5+360*.5,n=50,a=100;s.setHSB(e,n,a)}this.count+=1}}export{h as default};
