@@ -21,6 +21,9 @@ class PatternBase {
 			if (cube.x < this.xMin) this.xMin = cube.x;
 			if (cube.y > this.yMax) this.yMax = cube.y;
 			if (cube.y < this.yMin) this.yMin = cube.y;
+
+			// Reset all cubes color
+			cube.setHSB(0, 0, 0)
 		}
 	}
 	
