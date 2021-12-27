@@ -9,6 +9,8 @@ function loadPatterns(newPatternCallback) {
 		newPatternCallback(val);
 	});
 
+	newPatternCallback(PATTERNS[0]);
+
 	gui.add({ 'About this project': () => {
 		window.open('https://github.com/OmarShehata/entwined-web', '_blank')
 	} }, 'About this project');

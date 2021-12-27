@@ -57,6 +57,8 @@ class BaseCube extends THREE.Mesh {
 		hue = hue / 360
 		saturation = saturation / 100
 		brightness = brightness / 100
+		if (brightness > 1) brightness = 1;
+		if (brightness < 0) brightness = 0;
 
 		// Note: settings brightness to 100% makes it white, which
 		// isn't the behavior in the original entwined
